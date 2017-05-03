@@ -1,3 +1,5 @@
+#!/bin/bash
+
 if [ -n "$MYSQL_PASSWORD" ] ; then
 
 	TEMP_FILE='/tmp/mysql-first-run.sql'
