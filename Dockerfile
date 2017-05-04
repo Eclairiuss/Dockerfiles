@@ -12,7 +12,7 @@ ENV DEBIAN_FRONTEND noninteractive
 WORKDIR /tmp
 
 RUN groupadd tomcat && \
-	useradd -s /bin/false -g tomcat -d $CATALINA_HOME && \
+	useradd -s /bin/false -g tomcat -d $CATALINA_HOME tomcat && \
 	wget -O tomcat.tar.gz http://wwwftp.ciril.fr/pub/apache/tomcat/tomcat-$TOMCAT_MAJOR/v$TOMCAT_VERSION/bin/apache-tomcat-$TOMCAT_VERSION.tar.gz && \
 	tar -xzvf tomcat.tar.gz -C $CATALINA_HOME --strip-components=1 && \
 	chmod +x $CATALINA_HOME/bin/* && \
@@ -21,4 +21,4 @@ RUN groupadd tomcat && \
 	chmod g+x $CATALINA_HOME/conf && \
 	rm -rf tomcat.tar.gz
 
-CMD ["${CATALINA_HOME}/bin/catalina.sh","run"]
+CMD ["su","-c","${CATALINA_HOME}/bin/catalina.sh","run"]
